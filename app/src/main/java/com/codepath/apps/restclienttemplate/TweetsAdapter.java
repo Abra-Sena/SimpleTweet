@@ -41,6 +41,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         Tweet tweet = tweets.get(position);
         //bind the tweet with view holder
         holder.bindTweet(tweet);
+        //add time stamp(when tweet was posted)
+        tweet.getFormattedTimestamp();
     }
 
     @Override
@@ -66,6 +68,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivProfileImage;
         TextView tvScreenName;
         TextView tvBody;
+        TextView tvTimestamp;
 
         //itemView is the representation of one row in the RecyclerView (a tweet in this case)
         public ViewHolder(@NonNull View itemView) {
@@ -73,11 +76,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
             tvBody = itemView.findViewById(R.id.tvBody);
+            tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
         }
 
         public void bindTweet(Tweet tweet) {
             tvBody.setText((tweet.body));
             tvScreenName.setText((tweet.user.screenName));
+            tvTimestamp.setText(tweet.getFormattedTimestamp()); // set time when tweet was posted
             Glide.with(context).load(tweet.user.profileImageURl).into(ivProfileImage);
         }
     }

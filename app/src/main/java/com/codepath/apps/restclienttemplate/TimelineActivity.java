@@ -96,13 +96,9 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.e(TAG, "LoadMoreData onFailure! " + response, throwable);
-
+                Log.e(TAG, "LoadMoreData onFailure!", throwable);
             }
         }, tweets.get(tweets.size() - 1).id);
-        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
-
-
     }
 
     private void populateHomeTimeline() {
@@ -128,7 +124,7 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 //adding 'response' inform in the error message about why the failure occurred
-                Log.e(TAG, "onFailure! " + response, throwable);
+                Log.e(TAG, "onFailure!", throwable);
             }
         });
     }
