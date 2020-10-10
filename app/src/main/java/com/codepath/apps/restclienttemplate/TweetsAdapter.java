@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import org.parceler.Parcels;
+
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
 
@@ -66,7 +72,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivProfileImage;
-        TextView tvScreenName;
+        TextView tvUserName;
+        TextView tvHandler;
         TextView tvBody;
         TextView tvTimestamp;
 
@@ -74,16 +81,37 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
-            tvScreenName = itemView.findViewById(R.id.tvScreenName);
+
+            tvUserName = itemView.findViewById(R.id.tvUserName);
+            tvHandler = itemView.findViewById(R.id.tvHandler);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
         }
 
-        public void bindTweet(Tweet tweet) {
-            tvBody.setText((tweet.body));
-            tvScreenName.setText((tweet.user.screenName));
+        public void bindTweet(final Tweet tweet) {
+            int radius = 60;
+            int margin = 10;
+
+            tvBody.setText(tweet.body);
+            tvUserName.setText(tweet.user.name);
+            tvHandler.setText("@" + tweet.user.screenName);
             tvTimestamp.setText(tweet.getFormattedTimestamp()); // set time when tweet was posted
-            Glide.with(context).load(tweet.user.profileImageURl).into(ivProfileImage);
+            Glide.with(context)
+                    .load(tweet.user.profileImageURl)
+                    .transform(new RoundedCornersTransformation(radius,margin))
+                    .into(ivProfileImage);
+
+            tvBody.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("on click", "Access Tweet details");
+                    //navigate to a new activity on tap
+                    Intent i = new Intent(context, TweetDetailsActivity.class);
+                    i.putExtra("tweet", Parcels.wrap(tweet));
+                    context.startActivity(i);
+                }
+            });
+
         }
     }
 }

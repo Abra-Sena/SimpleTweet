@@ -2,9 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tweetDetail"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    tools:context=".TweetDetailsActivity">
+
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -36,19 +39,18 @@
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvUserName"
-        android:layout_alignParentStart="false"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
+        android:layout_below="@+id/ivProfileImage"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@id/ivProfileImage"
+        android:layout_marginBottom="10dp"
         android:autoLink="all"
         android:fontFamily="@font/roboto"
         android:linksClickable="true"
         android:textColor="#000"
         android:textColorLink="#00CCFF"
-        android:textSize="14sp"
+        android:textSize="22sp"
         android:textStyle="normal"
         tools:text="This is my tweet !" />
 
@@ -56,38 +58,30 @@
         android:id="@+id/tvHandler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tvUserName"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/tvUserName"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/ivProfileImage"
         android:ellipsize="end"
         android:fontFamily="@font/roboto"
         android:textColor="#000"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="normal"
         tools:text="@Emiline_T" />
 
     <TextView
         android:id="@+id/tvTimestamp"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tvBody"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_toEndOf="@id/tvHandler"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/roboto"
         android:textColor="#000"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="normal"
         tools:text="25 mins ago" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:background="?android:attr/listDivider" />
 </RelativeLayout>
